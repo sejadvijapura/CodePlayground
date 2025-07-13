@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Live Code Editor 🌙</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --input-bg: #f0f0f0;
+      --btn-bg: #007bff;
+    }
+    body.dark {
+      --bg: #121212;
+      --text: #f1f1f1;
+      --input-bg: #1e1e1e;
+      --btn-bg: #0d6efd;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: sans-serif;
+      padding: 10px;
+      transition: all 0.3s ease;
+    }
+    h1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin: 5px 0;
+      font-family: monospace;
+      background: var(--input-bg);
+      color: var(--text);
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+    iframe {
+      width: 100%;
+      height: 250px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      background: white;
+    }
+    button {
+      padding: 10px 15px;
+      background: var(--btn-bg);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .toggle-btn {
+      font-size: 14px;
+      background: transparent;
+      border: 1px solid var(--text);
+      color: var(--text);
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    Live Code Editor
+    <button class="toggle-btn" onclick="toggleDark()">🌙 Dark Mode</button>
+  </h1>
+
+  <textarea id="html" placeholder="HTML code here..."></textarea>
+  <textarea id="css" placeholder="CSS code here..."></textarea>
+  <textarea id="js" placeholder="JavaScript code here..."></textarea>
+
+  <button onclick="run()">▶️ Run Code</button>
+  <iframe id="output"></iframe>
+
+  <script>
+    function run() {
+      const html = document.getElementById('html').value;
+      const css = '<style>' + document.getElementById('css').value + '</style>';
+      const js = '<scr' + 'ipt>' + document.getElementById('js').value + '</scr' + 'ipt>';
+      document.getElementById('output').srcdoc = html + css + js;
+    }
+    function toggleDark() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
+</body>
+</html>
