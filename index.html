@@ -64,6 +64,11 @@
       border-radius: 4px;
       cursor: pointer;
     }
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
   </style>
 </head>
 <body>
@@ -76,16 +81,33 @@
   <textarea id="css" placeholder="CSS code here..."></textarea>
   <textarea id="js" placeholder="JavaScript code here..."></textarea>
 
-  <button onclick="run()">▶️ Run Code</button>
+  <div class="btn-group">
+    <button onclick="run()">▶️ Run Code</button>
+    <button onclick="openFullScreen()">🔳 Full Screen Preview</button>
+  </div>
+
   <iframe id="output"></iframe>
 
   <script>
-    function run() {
+    function getCode() {
       const html = document.getElementById('html').value;
-      const css = '<style>' + document.getElementById('css').value + '</style>';
-      const js = '<scr' + 'ipt>' + document.getElementById('js').value + '</scr' + 'ipt>';
-      document.getElementById('output').srcdoc = html + css + js;
+      const css = "<style>" + document.getElementById('css').value + "</style>";
+      const js = "<scr" + "ipt>" + document.getElementById('js').value + "</scr" + "ipt>";
+      return html + css + js;
     }
+
+    function run() {
+      document.getElementById('output').srcdoc = getCode();
+    }
+
+    function openFullScreen() {
+      const code = getCode();
+      const win = window.open();
+      win.document.open();
+      win.document.write(code);
+      win.document.close();
+    }
+
     function toggleDark() {
       document.body.classList.toggle('dark');
     }
